@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Amretha K — Infosys</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Smooth scroll + animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg-2:#0e0e0e;
+  --ink:#f3f1ec;
+  --ink-2:#cfcdc7;
+  --mute:#7a7873;
+  --mute-2:#4f4d49;
+  --line:#1f1f1f;
+  --line-2:#262626;
+  --chip:#141414;
+  --chip-bd:#262626;
+  --green:#7ed957;
+  --pill:#f5f3ee;
+  --pill-ink:#0a0a0a;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink);font-family:'Geist',system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:clip}
+
+::selection{background:var(--ink);color:var(--bg)}
+
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:transparent;border:0;cursor:pointer}
+
+.serif{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;letter-spacing:-.01em}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+/* ============== NAV ============== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 28px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(10,10,10,.55);border-bottom:1px solid transparent;transition:border-color .3s ease, background .3s ease;overflow:visible}
+.nav.scrolled{border-bottom-color:var(--line);background:rgba(10,10,10,.78)}
+.nav-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-family:'Geist',sans-serif;font-weight:600;font-size:19px;letter-spacing:-.015em;color:var(--ink);display:inline-flex;align-items:baseline;gap:.25em;transition:opacity .2s;line-height:1;overflow:visible;padding:4px 4px 4px 0}
+.logo:hover{opacity:.75}
+.logo .l-first{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.2em;letter-spacing:-.02em;overflow:visible;padding-bottom:3px}
+.logo .l-last{font-weight:600;overflow:visible;padding-right:2px}
+.nav-links{display:flex;gap:28px;font-size:13.5px;color:var(--ink-2)}
+.nav-links a{position:relative;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.5,0,.2,1)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-links a.active{color:var(--ink)}
+.nav-links a.active::after{transform:scaleX(1);transform-origin:left}
+.nav-cta{display:flex;align-items:center;gap:14px}
+.status{display:none}
+
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(126,217,87,.6)}70%{box-shadow:0 0 0 8px rgba(126,217,87,0)}100%{box-shadow:0 0 0 0 rgba(126,217,87,0)}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:var(--pill);color:var(--pill-ink);font-size:13px;font-weight:500;border:1px solid var(--pill);transition:transform .25s ease, background .2s, box-shadow .25s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(255,255,255,.18)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn.ghost:hover{background:#161616;border-color:#333}
+.btn .arr{display:inline-block;transition:transform .25s}
+.btn:hover .arr{transform:translateX(3px)}
+
+@media (max-width:780px){.nav-links{display:none}.nav{padding:14px 20px}}
+
+/* ============== HERO ============== */
+.hero{position:relative;padding:140px 0 60px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--ink-2);font-size:13px;padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;background:#0f0f0f;white-space:nowrap}
+.eyebrow .eb-em{font-family:'Instrument Serif',serif !important;font-style:italic !important;color:#ffffff !important;font-size:14px;font-weight:400;letter-spacing:-.005em;line-height:1;display:inline;opacity:1 !important}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(126,217,87,.55);animation:pulse 2s infinite}
+
+.h1{font-family:'Geist',sans-serif;font-weight:500;font-size:clamp(40px,6.4vw,82px);line-height:1.02;letter-spacing:-.035em;margin:22px 0 22px}
+.h1 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--ink)}
+.h1 .word{display:inline-block;overflow:hidden;vertical-align:bottom}
+.h1 .word > span{display:inline-block;will-change:transform}
+
+.lead{max-width:520px;color:var(--ink-2);font-size:14.5px;line-height:1.7}
+.lead em{font-style:italic;font-family:'Instrument Serif',serif;font-size:1.05em;color:var(--ink)}
+
+.hero-ctas{display:flex;gap:12px;margin-top:38px}
+
+/* RIGHT — pattern + photo + annotations */
+.hero-right{position:relative;min-height:420px;display:flex;align-items:center;justify-content:center}
+.tri-bg{position:absolute;inset:0;width:100%;height:100%;color:#4a4a4a;pointer-events:none;mask-image:radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,.85) 25%, rgba(0,0,0,.5) 50%, rgba(0,0,0,.2) 70%, transparent 90%);-webkit-mask-image:radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,.85) 25%, rgba(0,0,0,.5) 50%, rgba(0,0,0,.2) 70%, transparent 90%)}
+
+.photo-wrap{position:relative;width:300px;height:300px;display:grid;place-items:center;z-index:2}
+.photo{width:100%;height:100%;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#3a2c20,#1a1411);box-shadow:0 30px 80px -20px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.04)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo svg{width:100%;height:100%;display:block}
+
+.annot{position:absolute;display:inline-flex;align-items:flex-start;gap:8px;background:rgba(20,20,20,.92);border:1px solid var(--line-2);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px 12px;border-radius:10px;font-size:11.5px;color:var(--ink-2);line-height:1.35;max-width:180px;z-index:3;white-space:normal}
+.annot .plus{color:var(--mute);font-weight:500;font-size:14px;line-height:1;margin-top:1px;flex-shrink:0}
+.annot strong{color:var(--ink);font-weight:500;display:block}
+
+.annot.a1{top:-8%;left:-2%}
+.annot.a2{top:18%;right:-18%}
+.annot.a3{bottom:-2%;left:8%}
+
+@media (max-width:980px){
+  .hero{padding:120px 0 40px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-right{min-height:440px}
+}
+@media (max-width:520px){
+  .photo-wrap{width:240px;height:240px}
+  .annot{font-size:10.5px;max-width:150px;padding:6px 10px}
+  .annot.a2{right:-6%}
+}
+
+/* ============== SKILLS MARQUEE ============== */
+.skills{padding:90px 0 40px;border-top:1px solid var(--line);margin-top:50px;position:relative;overflow:hidden}
+.skills-head{text-align:center;margin-bottom:42px}
+.skills-tag{display:inline-flex;align-items:center;gap:8px;color:var(--ink-2);font-size:12.5px;padding:6px 11px;border:1px solid var(--line-2);border-radius:999px;background:#0f0f0f;margin-bottom:16px}
+.skills-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.skills-title{font-family:'Geist',sans-serif;font-weight:500;font-size:clamp(22px,2.6vw,32px);line-height:1.2;letter-spacing:-.02em;color:var(--ink-2)}
+.skills-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--ink);font-weight:400;font-size:1.15em}
+
+.marquee{position:relative;width:100%;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)}
+.marquee-track{display:flex;gap:16px;width:max-content;animation:marquee 50s linear infinite;will-change:transform}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.skill{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px 28px;color:var(--ink-2);font-size:13px;font-weight:500;letter-spacing:-.005em;white-space:nowrap;transition:color .3s ease,transform .35s cubic-bezier(.2,.7,.2,1);flex-shrink:0;min-width:120px}
+.skill:hover{color:var(--ink);transform:translateY(-4px)}
+.skill img,.skill svg{width:44px;height:44px;display:block;flex-shrink:0;color:var(--ink-2);opacity:.75;transition:opacity .3s,color .3s,transform .35s ease}
+.skill:hover img,.skill:hover svg{opacity:1;color:var(--ink);transform:scale(1.06)}
+
+/* ============== SECTION HEADERS ============== */
+.sec-head{padding:90px 0 36px;display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.sec-tag{display:inline-flex;align-items:center;gap:8px;color:var(--ink-2);font-size:12.5px;padding:6px 11px;border:1px solid var(--line-2);border-radius:8px;background:#0f0f0f}
+.sec-tag svg{width:13px;height:13px;opacity:.85}
+.h2{font-family:'Geist',sans-serif;font-weight:500;font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-.03em;max-width:14ch;margin-top:18px}
+.h2 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+.sec-sub{color:var(--mute);font-size:13.5px;max-width:340px;line-height:1.65}
+
+/* ============== PROJECTS ============== */
+.projects{display:grid;grid-template-columns:1fr;gap:18px;padding-bottom:30px}
+.proj{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,#0d0d0d, #0a0a0a);border-radius:18px;padding:14px;display:grid;grid-template-columns:1fr;overflow:hidden;transition:border-color .35s ease, transform .5s cubic-bezier(.2,.7,.2,1)}
+.proj:hover{border-color:#2c2c2c}
+.proj-cover{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:#111}
+.proj-cover img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.proj:hover .proj-cover img{transform:scale(1.04)}
+.view-pill{position:absolute;right:14px;bottom:14px;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:rgba(20,20,20,.78);color:var(--ink);font-size:12.5px;border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+.view-pill .arr{transition:transform .25s}
+.proj:hover .view-pill .arr{transform:translateX(3px)}
+
+.proj-meta{padding:18px 6px 6px;display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start}
+.proj-title{font-size:21px;font-weight:500;letter-spacing:-.015em}
+.proj-desc{margin-top:10px;color:var(--mute);font-size:13.5px;max-width:48ch;line-height:1.6}
+.proj-side{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+.role{color:var(--ink-2);font-size:12.5px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;max-width:280px}
+.tag{font-size:11.5px;color:var(--ink-2);padding:5px 10px;border:1px solid var(--line-2);border-radius:999px;background:#0f0f0f;transition:border-color .2s, color .2s}
+.tag:hover{border-color:#3a3a3a;color:var(--ink)}
+
+@media (max-width:760px){.proj-meta{grid-template-columns:1fr}.proj-side{align-items:flex-start}.tags{justify-content:flex-start}}
+
+/* ============== TESTIMONIALS ============== */
+/* Testimonial styles removed */
+
+/* ============== CTA STRIP ============== */
+.cta-strip{position:relative;padding:90px 0 30px;text-align:center;overflow:hidden;--mx:50%;--my:50%;--glow:0}
+.cta-strip::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;background-image:radial-gradient(circle at 1px 1px, #2a2a2a 1px, transparent 1.4px);background-size:14px 14px;mask-image:radial-gradient(ellipse 60% 60% at 50% 50%, transparent 25%, #000 60%, transparent 95%);-webkit-mask-image:radial-gradient(ellipse 60% 60% at 50% 50%, transparent 25%, #000 60%, transparent 95%);opacity:.55;pointer-events:none}
+/* Cursor-tracked spotlight: brighter dots that bloom around the mouse */
+.cta-strip::after{content:"";position:absolute;left:0;right:0;top:0;bottom:0;background-image:radial-gradient(circle at 1px 1px, #f3f1ec 1px, transparent 1.4px);background-size:14px 14px;mask-image:radial-gradient(circle 220px at var(--mx) var(--my), #000 0%, rgba(0,0,0,.4) 40%, transparent 70%);-webkit-mask-image:radial-gradient(circle 220px at var(--mx) var(--my), #000 0%, rgba(0,0,0,.4) 40%, transparent 70%);opacity:var(--glow);transition:opacity .4s ease;pointer-events:none}
+.cta-strip:hover{--glow:.85}
+.cta-strip h3{position:relative;font-family:'Geist',sans-serif;font-weight:500;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.025em;z-index:1}
+.cta-strip h3 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+.cta-strip .ctas{position:relative;z-index:1;display:inline-flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:30px}
+.cta-strip .ctas .btn{justify-content:center;padding:11px 18px}
+
+/* ============== BIG NAME ============== */
+.big-name{padding:40px 0 14px;line-height:.85;overflow:hidden;width:100%}
+.big-name .inner{font-size:clamp(48px,11.5vw,180px);letter-spacing:-.045em;white-space:nowrap;text-align:center;color:var(--ink);transform-origin:50% 100%;display:flex;justify-content:center;align-items:baseline;gap:.12em;padding:0 12px}
+.big-name .bn-first{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+.big-name .bn-last{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-.03em}
+
+/* ============== FOOTER ============== */
+.footer{padding:14px 28px 28px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--mute);max-width:1240px;margin:0 auto}
+.footer-links{display:flex;gap:22px}
+.footer-links a:hover{color:var(--ink-2)}
+.socials{display:flex;gap:12px}
+.socials a{width:30px;height:30px;border:1px solid var(--line-2);border-radius:8px;display:grid;place-items:center;transition:border-color .2s, color .2s}
+.socials a:hover{border-color:#3a3a3a;color:var(--ink-2)}
+.socials svg{width:14px;height:14px}
+
+/* ============== REVEAL ============== */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d2{transition-delay:.08s}
+.reveal.d3{transition-delay:.16s}
+.reveal.d4{transition-delay:.24s}
+
+/* ============== CUSTOM TRIANGLE CURSOR ============== */
+@media (hover:hover) and (pointer:fine){
+  *{cursor:none !important}
+}
+.cursor{position:fixed;left:0;top:0;width:24px;height:24px;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);will-change:transform;mix-blend-mode:difference}
+.cursor svg{width:100%;height:100%;display:block;overflow:visible}
+.cursor .tri{fill:#fff;transition:opacity .2s ease, transform .25s cubic-bezier(.2,.7,.2,1)}
+.cursor .ring{fill:none;stroke:#fff;stroke-width:1.4;opacity:0;transform-origin:center;transform:scale(.4);transition:opacity .25s ease, transform .35s cubic-bezier(.2,.7,.2,1)}
+.cursor.is-link .tri{opacity:0;transform:scale(.3)}
+.cursor.is-link .ring{opacity:1;transform:scale(1)}
+
+.cursor-dot{position:fixed;left:0;top:0;width:5px;height:5px;border-radius:50%;background:#fff;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);will-change:transform;mix-blend-mode:difference;opacity:.6}
+
+/* Hide everything on touch devices */
+@media (hover:none),(pointer:coarse){
+  .cursor,.cursor-dot{display:none}
+}
+
+/* Subtle grain */
+.grain{position:fixed;inset:-50%;pointer-events:none;z-index:1;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor" aria-hidden="true">
+  <svg viewBox="-12 -12 24 24" xmlns="http://www.w3.org/2000/svg">
+    <circle class="ring" cx="0" cy="0" r="11"/>
+    <path class="tri" d="M -6 -7 L 8 0 L -6 7 Z"/>
+  </svg>
+</div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="grain"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo" aria-label="Amretha K — back to top"><span class="l-first">Amretha</span><span class="l-last"><em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400">K</em></span></a>
+    <div class="nav-links">
+      <a href="#projects">project</a>
+      <a href="#about">about</a>
+      <a href="#contact">contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" data-link="email" class="btn">Reach me out <span class="arr">↗</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-left">
+      <span class="eyebrow"><span class="dot"></span><span class="eb-text">currently @ <em class="eb-em">Infosys</em> · system engineer</span></span>
+      <h1 class="h1">
+        <span class="word"><span data-h="1">I&nbsp;build&nbsp;with</span></span>
+        <br>
+        <em><span class="word"><span data-h="2">core&nbsp;web&nbsp;technologies.</span></span></em>
+      </h1>
+      <p class="lead">A dedicated professional at <em>Infosys</em>, passionate about technology and innovation. Committed to delivering high-quality solutions and continuously growing in the ever-evolving tech landscape.</p>
+
+      <div class="hero-ctas">
+        <a href="#" data-link="linkedin" target="_blank" rel="noopener" class="btn">View LinkedIn <span class="arr">↗</span></a>
+        <a href="#contact" class="btn ghost">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <!-- Triangle pattern background as SVG (always renders, no JS dependency) -->
+      <svg class="tri-bg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <pattern id="triPat" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+            <path d="M8 7 L 14 11 L 8 15 Z" fill="currentColor"/>
+          </pattern>
+        </defs>
+        <rect width="600" height="600" fill="url(#triPat)"/>
+      </svg>
+
+      <div class="photo-wrap">
+        <div class="annot a1"><span class="plus">+</span><span><strong>Infosys</strong> system engineer</span></div>
+        <div class="annot a2"><span class="plus">+</span><span><strong>Kerala, India</strong> based in Kasargod</span></div>
+        <div class="annot a3"><span class="plus">+</span><span><strong>Open to connect</strong> LinkedIn network</span></div>
+        <div class="photo">
+          <!-- Real portrait via Unsplash; replace src with your own image when ready -->
+          <img src="headshot.jpeg" alt="Amretha K" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+          <!-- SVG fallback if image fails -->
+          <svg style="display:none" viewBox="0 0 230 230" xmlns="http://www.w3.org/2000/svg" aria-label="profile">
+            <defs>
+              <radialGradient id="bg1" cx="50%" cy="35%" r="70%"><stop offset="0%" stop-color="#3a2c20"/><stop offset="100%" stop-color="#1a1411"/></radialGradient>
+              <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e6b694"/><stop offset="100%" stop-color="#b9835f"/></linearGradient>
+              <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#352920"/></linearGradient>
+              <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2b2b2b"/><stop offset="100%" stop-color="#0f0f0f"/></linearGradient>
+            </defs>
+            <rect width="230" height="230" fill="url(#bg1)"/>
+            <path d="M0 230 C 30 175, 70 162, 115 162 C 160 162, 200 175, 230 230 Z" fill="url(#shirt)"/>
+            <rect x="98" y="135" width="34" height="34" fill="url(#skin)"/>
+            <ellipse cx="115" cy="108" rx="48" ry="55" fill="url(#skin)"/>
+            <path d="M68 92 C 72 60, 105 48, 130 54 C 155 60, 168 78, 162 100 C 158 90, 145 82, 130 82 C 110 82, 92 88, 80 100 C 74 100, 70 96, 68 92 Z" fill="url(#hair)"/>
+            <rect x="92" y="100" width="14" height="2.5" rx="1" fill="#221813"/>
+            <rect x="124" y="100" width="14" height="2.5" rx="1" fill="#221813"/>
+            <circle cx="99" cy="110" r="2.4" fill="#1a120c"/>
+            <circle cx="131" cy="110" r="2.4" fill="#1a120c"/>
+            <path d="M100 138 Q 115 150, 130 138" fill="none" stroke="#3b2418" stroke-width="2" stroke-linecap="round"/>
+            <ellipse cx="100" cy="92" rx="14" ry="6" fill="#fff" opacity=".05"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ SKILLS MARQUEE ============ -->
+<section class="skills" id="about">
+  <div class="wrap skills-head">
+    <span class="skills-tag"><span class="dot"></span> skills &amp; stack</span>
+    <h2 class="skills-title">Tools and technologies <em>I work with</em></h2>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <!-- Each skill uses an inline SVG so it renders without external requests -->
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <!-- Steam lines -->
+          <path d="M9.5 1.5c-.8 1.2-.8 2 0 3.2.8 1.2.8 2 0 3.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M13 1c-.8 1.2-.8 2 0 3.2.8 1.2.8 2 0 3.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M16.5 1.5c-.8 1.2-.8 2 0 3.2.8 1.2.8 2 0 3.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <!-- Cup body -->
+          <path d="M5.5 10h13l-.9 9.2c-.12 1.2-1.13 2.1-2.34 2.1H8.74c-1.21 0-2.22-.9-2.34-2.1L5.5 10z"/>
+          <!-- Handle -->
+          <path d="M18.4 12.2h.6c1.5 0 2.7 1.2 2.7 2.7s-1.2 2.7-2.7 2.7h-.95" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <!-- Saucer -->
+          <ellipse cx="12" cy="22.6" rx="6" ry=".8" opacity=".5"/>
+        </svg>
+        Core Java
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M11.109.024a15.58 15.58 0 00-.737.023C6.728.361 3.469 2.517 1.579 5.86A12.53 12.53 0 00.021 11.11c-.04.517-.02 1.745.035 2.208.306 2.682 1.353 5.06 3.07 6.965 1.962 2.173 4.586 3.467 7.437 3.663.42.032 1.043.04 1.02.012a2.404 2.404 0 00-.338-.074c-1.674-.33-3.388-1.13-4.777-2.232a12.344 12.344 0 01-2.45-2.636A12.387 12.387 0 011.884 12.5a12.413 12.413 0 01.56-4.274c.785-2.522 2.37-4.726 4.475-6.228A11.073 11.073 0 0111.156.122l.443-.098zm1.474.51C10.646.65 8.807 1.299 7.301 2.4 5.426 3.77 3.995 5.644 3.22 7.746c-.145.397-.282.82-.282.879 0 .012 3.828.024 10.31.024 8.463 0 10.315-.008 10.315-.036 0-.047-.153-.525-.283-.878-.153-.42-.576-1.31-.82-1.722-.4-.683-.91-1.373-1.474-1.992-1.65-1.82-3.593-2.934-5.82-3.334-.785-.141-1.8-.2-2.585-.153zM23.83 9.97c-.02 0-4.792 0-10.609.004l-10.573.008-.011.059c-.036.16-.134 1.081-.134 1.242 0 .028 1.785.032 10.746.032H24v-.075c0-.102-.07-.791-.106-1.054-.02-.16-.04-.216-.063-.216zm-10.573 2.635c-9.37-.004-10.73 0-10.742.035-.02.04.024.557.075.973.02.157.035.298.035.314 0 .027 2.137.035 10.624.035h10.624l.024-.188c.043-.326.102-.97.094-1.067l-.008-.094zm.003 2.718c-8.882 0-10.321.004-10.321.035 0 .02.054.208.12.42a11.122 11.122 0 002.072 3.741c.282.342.945 1.036 1.228 1.287 1.568 1.4 3.247 2.216 5.18 2.53.605.094.886.113 1.75.11.91 0 1.297-.032 2.023-.177 2.11-.416 3.914-1.451 5.53-3.17 1.267-1.348 2.106-2.76 2.628-4.41l.117-.366z"/>
+        </svg>
+        Eclipse
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <ellipse cx="12" cy="5" rx="8" ry="2.5"/>
+          <path d="M4 5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5V5"/>
+          <path d="M4 11v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/>
+        </svg>
+        DBMS (HSQL)
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+        </svg>
+        HTML
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M0 0v20.16A3.84 3.84 0 0 0 3.84 24h16.32A3.84 3.84 0 0 0 24 20.16V3.84A3.84 3.84 0 0 0 20.16 0Zm14.256 13.08c1.56 0 2.28 1.08 2.304 2.64h-1.608c.024-.288-.048-.6-.144-.84-.096-.192-.288-.264-.552-.264-.456 0-.696.264-.696.84-.024.576.288.888.768 1.08.72.288 1.608.744 1.92 1.296q.432.648.432 1.656c0 1.608-.912 2.592-2.496 2.592-1.656 0-2.4-1.032-2.424-2.688h1.68c0 .792.264 1.176.792 1.176.264 0 .456-.072.552-.24.192-.312.24-1.176-.048-1.512-.312-.408-.912-.6-1.32-.816q-.828-.396-1.224-.936c-.24-.36-.36-.888-.36-1.536 0-1.44.936-2.472 2.424-2.448m5.4 0c1.584 0 2.304 1.08 2.328 2.64h-1.608c0-.288-.048-.6-.168-.84-.096-.192-.264-.264-.528-.264-.48 0-.72.264-.72.84s.288.888.792 1.08c.696.288 1.608.744 1.92 1.296.264.432.408.984.408 1.656.024 1.608-.888 2.592-2.472 2.592-1.68 0-2.424-1.056-2.448-2.688h1.68c0 .744.264 1.176.792 1.176.264 0 .456-.072.552-.24.216-.312.264-1.176-.048-1.512-.288-.408-.888-.6-1.32-.816-.552-.264-.96-.576-1.2-.936s-.36-.888-.36-1.536c-.024-1.44.912-2.472 2.4-2.448m-11.031.018c.711-.006 1.419.198 1.839.63.432.432.672 1.128.648 1.992H9.336c.024-.456-.096-.792-.432-.96-.312-.144-.768-.048-.888.24-.12.264-.192.576-.168.864v3.504c0 .744.264 1.128.768 1.128a.65.65 0 0 0 .552-.264c.168-.24.192-.552.168-.84h1.776c.096 1.632-.984 2.712-2.568 2.688-1.536 0-2.496-.864-2.472-2.472v-4.032c0-.816.24-1.44.696-1.848.432-.408 1.146-.624 1.857-.63"/>
+        </svg>
+        CSS
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/>
+        </svg>
+        TypeScript
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/>
+        </svg>
+        React
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="m23.693 10.7058-4.73-8.1844c-.4094-.7106-1.4166-1.2942-2.2402-1.2942H7.2725c-.819 0-1.8308.5836-2.2402 1.2942L.307 10.7058c-.4095.7106-.4095 1.873 0 2.5837l4.7252 8.189c.4094.7107 1.4166 1.2943 2.2402 1.2943h9.455c.819 0 1.826-.5836 2.2402-1.2942l4.7252-8.189c.4095-.7107.4095-1.8732 0-2.5838zM10.9763 5.7547c0-.5365.4377-.9742.9742-.9742s.9742.4377.9742.9742v5.8217c0 .5366-.4377.9742-.9742.9742s-.9742-.4376-.9742-.9742zm.9742 12.4294c-3.6427 0-6.6077-2.965-6.6077-6.6077.0047-2.0896.993-4.0521 2.6685-5.304a.8657.8657 0 0 1 1.2142.1788.8657.8657 0 0 1-.1788 1.2143c-2.1602 1.6048-2.612 4.6592-1.0072 6.8194 1.6049 2.1603 4.6593 2.612 6.8195 1.0072 1.2378-.9177 1.9673-2.372 1.9673-3.9157a4.8972 4.8972 0 0 0-1.9861-3.925c-.386-.2824-.466-.8284-.1836-1.2143.2824-.386.8283-.466 1.2143-.1835 1.6895 1.2471 2.6826 3.2238 2.6873 5.3228 0 3.6474-2.965 6.6077-6.6077 6.6077z"/>
+        </svg>
+        Spring Boot
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <!-- Steam lines -->
+          <path d="M9.5 1.5c-.8 1.2-.8 2 0 3.2.8 1.2.8 2 0 3.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M13 1c-.8 1.2-.8 2 0 3.2.8 1.2.8 2 0 3.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M16.5 1.5c-.8 1.2-.8 2 0 3.2.8 1.2.8 2 0 3.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <!-- Cup body -->
+          <path d="M5.5 10h13l-.9 9.2c-.12 1.2-1.13 2.1-2.34 2.1H8.74c-1.21 0-2.22-.9-2.34-2.1L5.5 10z"/>
+          <!-- Handle -->
+          <path d="M18.4 12.2h.6c1.5 0 2.7 1.2 2.7 2.7s-1.2 2.7-2.7 2.7h-.95" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <!-- Saucer -->
+          <ellipse cx="12" cy="22.6" rx="6" ry=".8" opacity=".5"/>
+        </svg>
+        Advanced Java
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
+        </svg>
+        Python
+      </div>
+
+      <div class="skill">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.922 0h2.623v18.104h-2.623zm-4.126 12.94h2.623v2.57h-2.623zm0-7.037h2.623v5.446h-2.623zm0 11.197h2.623v5.446h-2.623zM4.456 5.896h2.622V24H4.455zm4.213 2.559h2.623v2.57H8.67zm0 4.151h2.623v5.447H8.67zm0-11.187h2.623v5.446H8.67Z"/>
+        </svg>
+        Data Science (Python)
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="wrap" id="projects">
+  <div class="sec-head">
+    <div>
+      <span class="sec-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M2 7h12"/></svg> projects</span>
+      <h2 class="h2">Featured <em>project</em><br>showcase</h2>
+    </div>
+    <p class="sec-sub">The standard of work I thrive to achieve every time I got my hands on new things</p>
+  </div>
+
+  <div class="projects">
+    <!-- 1 - AI Resume Screening -->
+    <article class="proj reveal">
+      <div class="proj-cover">
+        <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-label="AI Resume Screening cover">
+          <defs>
+            <linearGradient id="rs-bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#5b1a4a"/>
+              <stop offset="55%" stop-color="#3a1130"/>
+              <stop offset="100%" stop-color="#1a0a14"/>
+            </linearGradient>
+            <linearGradient id="rs-ring" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffd1a8"/>
+              <stop offset="100%" stop-color="#f5a06b"/>
+            </linearGradient>
+            <radialGradient id="rs-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity=".08"/>
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="1200" height="600" fill="url(#rs-bg)"/>
+
+          <!-- Welcome heading - properly spaced -->
+          <text x="80" y="135" font-family="Geist,sans-serif" font-weight="800" font-size="58" fill="#f5d76e">Welcome</text>
+          <text x="445" y="135" font-family="Instrument Serif,serif" font-style="italic" font-size="58" fill="#e8c8b0">Ann...</text>
+
+          <!-- Candidate metadata -->
+          <g font-family="Geist,sans-serif" font-size="19" fill="#e8c8b0">
+            <text x="80" y="200">Name: Ann</text>
+            <text x="80" y="232">Email: amrethakkaran@gmail.com</text>
+            <text x="80" y="264">Phone: 9912345677</text>
+            <text x="80" y="296">Job Role: INFORMATION-TECHNOLOGY</text>
+          </g>
+
+          <!-- "YOUR RESULT" + score (centered column) -->
+          <text x="600" y="225" font-family="Geist,sans-serif" font-weight="700" font-size="22" fill="#f5d76e" text-anchor="middle" letter-spacing="2">YOUR RESULT</text>
+          <circle cx="600" cy="380" r="98" fill="url(#rs-glow)"/>
+          <circle cx="600" cy="380" r="92" fill="none" stroke="#ffffff" stroke-width="2" opacity=".3"/>
+          <circle cx="600" cy="380" r="78" fill="rgba(255,255,255,.05)"/>
+          <text x="600" y="395" font-family="Geist,sans-serif" font-weight="800" font-size="68" fill="#ffffff" text-anchor="middle">91</text>
+          <text x="600" y="422" font-family="Geist Mono,monospace" font-size="13" fill="#e8c8b0" text-anchor="middle" opacity=".7">/ 100</text>
+          <text x="600" y="525" font-family="Instrument Serif,serif" font-style="italic" font-size="24" fill="#f5d76e" text-anchor="middle">Smart Screening, Faster Hiring!</text>
+
+          <!-- Performance Overview donut (right column) -->
+          <text x="990" y="225" font-family="Geist,sans-serif" font-weight="600" font-size="20" fill="#e8c8b0" text-anchor="middle">Performance Overview</text>
+          <g transform="translate(990,380)">
+            <circle r="98" fill="none" stroke="#ffffff" stroke-width="22" opacity=".15"/>
+            <path d="M 0 -98 A 98 98 0 1 1 -57 79.4" fill="none" stroke="url(#rs-ring)" stroke-width="22" stroke-linecap="round"/>
+            <circle r="62" fill="rgba(255,255,255,.04)"/>
+          </g>
+        </svg>
+        <a class="view-pill" href="#">View case study <span class="arr">↗</span></a>
+      </div>
+      <div class="proj-meta">
+        <div>
+          <h3 class="proj-title">AI-powered Automated Resume Screening System</h3>
+          <p class="proj-desc">A smart screening tool that scores candidate resumes against job roles, surfacing strengths and skill gaps to help recruiters shortlist faster.</p>
+        </div>
+        <div class="proj-side">
+          <span class="role">Full-Stack Developer · ML</span>
+          <div class="tags">
+            <span class="tag">Machine Learning</span><span class="tag">Django REST</span>
+            <span class="tag">React</span><span class="tag">Python</span>
+            <span class="tag">HTML5</span><span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span><span class="tag">Bootstrap</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2 - Movie Recommendation System -->
+    <article class="proj reveal">
+      <div class="proj-cover">
+        <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-label="Movie Recommender cover">
+          <defs>
+            <linearGradient id="mv-bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#0a1228"/>
+              <stop offset="100%" stop-color="#050813"/>
+            </linearGradient>
+            <linearGradient id="mv-purple" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a78bfa"/>
+              <stop offset="100%" stop-color="#7c3aed"/>
+            </linearGradient>
+            <linearGradient id="mv-pink" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fb7185"/>
+              <stop offset="100%" stop-color="#e11d48"/>
+            </linearGradient>
+            <linearGradient id="mv-blue" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#60a5fa"/>
+              <stop offset="100%" stop-color="#2563eb"/>
+            </linearGradient>
+            <radialGradient id="mv-sphere" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffd1d8"/>
+              <stop offset="40%" stop-color="#fb7185"/>
+              <stop offset="100%" stop-color="#9f1239"/>
+            </radialGradient>
+          </defs>
+          <rect width="1200" height="600" fill="url(#mv-bg)"/>
+
+          <!-- Subtle grid floor for depth -->
+          <g stroke="#1a2540" stroke-width="1" opacity=".55">
+            <path d="M0 540 L 1200 540"/>
+            <path d="M0 558 L 1200 558"/>
+            <path d="M0 576 L 1200 576"/>
+            <path d="M0 594 L 1200 594"/>
+          </g>
+
+          <!-- Laptop -->
+          <g transform="translate(140,150)">
+            <!-- screen body -->
+            <rect width="420" height="270" rx="16" fill="#ffffff"/>
+            <rect x="16" y="16" width="388" height="220" rx="8" fill="#f1f5f9"/>
+
+            <!-- bar chart -->
+            <g transform="translate(50,68)">
+              <rect x="0" y="44" width="16" height="64" rx="3" fill="url(#mv-purple)"/>
+              <rect x="22" y="28" width="16" height="80" rx="3" fill="url(#mv-purple)"/>
+              <rect x="44" y="56" width="16" height="52" rx="3" fill="url(#mv-purple)"/>
+              <rect x="66" y="12" width="16" height="96" rx="3" fill="url(#mv-purple)"/>
+            </g>
+
+            <!-- pie chart -->
+            <g transform="translate(200,128)">
+              <circle r="40" fill="url(#mv-pink)"/>
+              <path d="M0 0 L 40 0 A 40 40 0 0 1 -12 38 Z" fill="url(#mv-blue)"/>
+              <circle r="40" fill="none" stroke="#ffffff" stroke-width="2"/>
+            </g>
+
+            <!-- text lines under chart area -->
+            <rect x="50" y="190" width="140" height="6" rx="3" fill="#cbd5e1"/>
+            <rect x="50" y="204" width="220" height="6" rx="3" fill="#cbd5e1" opacity=".7"/>
+            <rect x="50" y="218" width="90" height="6" rx="3" fill="#cbd5e1" opacity=".5"/>
+
+            <!-- right-side colored blocks -->
+            <rect x="280" y="68" width="108" height="80" rx="6" fill="url(#mv-blue)"/>
+            <rect x="280" y="156" width="108" height="50" rx="6" fill="url(#mv-pink)"/>
+
+            <!-- laptop base / hinge -->
+            <rect x="-28" y="270" width="476" height="14" rx="4" fill="#e2e8f0"/>
+            <rect x="-28" y="270" width="476" height="4" fill="#cbd5e1"/>
+          </g>
+
+          <!-- Title -->
+          <g font-family="Geist,sans-serif" font-weight="800" font-size="72" fill="#3b82f6" letter-spacing="-2">
+            <text x="660" y="218">Movie</text>
+            <text x="660" y="298">Recommender</text>
+            <text x="660" y="378">System</text>
+          </g>
+
+          <!-- Floating sphere accent (3D-shaded) -->
+          <g transform="translate(1110,160)">
+            <ellipse cx="0" cy="22" rx="14" ry="3" fill="#000000" opacity=".25"/>
+            <circle r="22" fill="url(#mv-sphere)"/>
+            <ellipse cx="-7" cy="-9" rx="7" ry="4" fill="#ffffff" opacity=".55"/>
+          </g>
+        </svg>
+        <a class="view-pill" href="#">View case study <span class="arr">↗</span></a>
+      </div>
+      <div class="proj-meta">
+        <div>
+          <h3 class="proj-title">Movie Recommendation System</h3>
+          <p class="proj-desc">Content-based recommender that suggests films from a user's preferences using cosine similarity over a TF-IDF feature space — built end-to-end in a Jupyter Notebook with interactive widgets.</p>
+        </div>
+        <div class="proj-side">
+          <span class="role">Data Science · Python</span>
+          <div class="tags">
+            <span class="tag">Pandas</span><span class="tag">NumPy</span>
+            <span class="tag">Scikit-learn</span><span class="tag">TF-IDF</span>
+            <span class="tag">Cosine Similarity</span><span class="tag">Ipywidgets</span>
+            <span class="tag">Jupyter</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-strip wrap" id="contact">
+  <h3>That <em>wasn't</em><br>everything yet</h3>
+  <div class="ctas">
+    <a class="btn" href="#projects">More about me <span class="arr">↗</span></a>
+    <a class="btn ghost" href="#" data-link="resume">Download my resume <span class="arr">↓</span></a>
+  </div>
+</section>
+
+<!-- ============ BIG NAME ============ -->
+<section class="big-name">
+  <div class="inner" id="bigname"><span class="bn-first">Amretha</span> <span class="bn-last">K</span></div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="#projects">project</a>
+    <a href="#about">about</a>
+    <a href="#contact">contact</a>
+  </div>
+  <div class="socials">
+    <a href="#" data-link="linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+    </a>
+  </div>
+  <div>© 2025 Amretha K. All rights reserved.</div>
+</footer>
+
+<script>
+/* ╔══════════════════════════════════════════════════════════════════════╗
+   ║                       SITE CONFIG — EDIT HERE                        ║
+   ╠══════════════════════════════════════════════════════════════════════╣
+   ║  Change the values below and the rest of the page picks them up.     ║
+   ║  No need to hunt through markup.                                     ║
+   ╚══════════════════════════════════════════════════════════════════════╝ */
+const CONFIG = {
+  // Primary contact email — opens default mail client when "Reach me out" is clicked
+  email: 'amrethakkaran@gmail.com',
+
+  // LinkedIn profile URL (used in footer social icon)
+  linkedin: 'https://www.linkedin.com/in/amretha-k-734a24253/',
+
+  // Resume PDF URL — used by both "Download my resume" buttons.
+  // HOSTING STEP: Upload your resume to one of these and paste the public URL here:
+  //   1. Google Drive: Share → "Anyone with the link" → File → Download as PDF link
+  //   2. Dropbox: Right-click → Share → Copy link, then change "?dl=0" to "?dl=1"
+  //   3. GitHub: commit resume.pdf to a repo → use the raw.githubusercontent.com URL
+  //   4. Your own domain: e.g. https://yoursite.com/resume.pdf
+  resume: '#',
+
+  // Default subject line for the "Reach me out" mail
+  emailSubject: "Let's work together",
+};
+
+/* Apply CONFIG to the DOM — runs immediately so links are wired before user can click */
+(() => {
+  const mailto = `mailto:${CONFIG.email}?subject=${encodeURIComponent(CONFIG.emailSubject)}`;
+  document.querySelectorAll('[data-link="email"]').forEach(a => a.href = mailto);
+  document.querySelectorAll('[data-link="linkedin"]').forEach(a => a.href = CONFIG.linkedin);
+  document.querySelectorAll('[data-link="resume"]').forEach(a => {
+    a.href = CONFIG.resume;
+    if(CONFIG.resume !== '#'){
+      a.setAttribute('download', '');
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+    }
+  });
+})();
+
+/* ====================== Smooth scroll (Lenis) ====================== */
+const lenis = new Lenis({
+  duration: 1.15,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothWheel: true,
+  wheelMultiplier: 1,
+});
+function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+
+/* Anchor links via Lenis — smooth, eased, with proper nav offset */
+const NAV_OFFSET = -88; // height of fixed nav so target sits below it
+const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if(!id || id === '#') return;
+    e.preventDefault();
+    // Special case: #top scrolls to page top
+    if(id === '#top'){
+      lenis.scrollTo(0, { duration: 1.6, easing: easeInOutCubic, lock: true });
+      return;
+    }
+    const t = document.querySelector(id);
+    if(!t) return;
+    lenis.scrollTo(t, {
+      offset: NAV_OFFSET,
+      duration: 1.6,
+      easing: easeInOutCubic,
+      lock: true,        // ignore wheel/touch during the animation
+    });
+  });
+});
+
+/* Active nav link tracking — underline slides between sections */
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+sections.forEach((sec, i) => {
+  ScrollTrigger.create({
+    trigger: sec,
+    start: 'top 30%',
+    end: 'bottom 30%',
+    onToggle: self => {
+      if(self.isActive){
+        navLinks.forEach(l => l.classList.remove('active'));
+        navLinks[i]?.classList.add('active');
+      }
+    }
+  });
+});
+
+/* Hook GSAP ScrollTrigger to Lenis */
+gsap.registerPlugin(ScrollTrigger);
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(t => lenis.raf(t * 1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ====================== Hero text reveal ====================== */
+gsap.set('.h1 .word > span', { yPercent: 110 });
+gsap.to('.h1 .word > span', {
+  yPercent: 0, duration: 1.05, ease: 'expo.out', stagger: 0.08, delay: 0.15
+});
+
+/* Eyebrow + lead + ctas + photo basic reveal */
+const intro = gsap.timeline({ delay: 0.05 });
+intro.from('.eyebrow', { y: 12, opacity: 0, duration: .7, ease:'power2.out' })
+     .from('.lead',    { y: 14, opacity: 0, duration: .7, ease:'power2.out' }, '-=0.45')
+     .from('.hero-ctas .btn', { y: 14, opacity: 0, duration: .6, ease:'power2.out', stagger: .07 }, '-=0.45')
+     .from('.photo-wrap', { scale: .92, opacity: 0, duration: 1, ease:'power3.out' }, '-=0.7')
+     .from('.annot',  { y: 10, opacity: 0, duration: .55, ease:'power2.out', stagger: .12 }, '-=0.6');
+
+/* ====================== Generic .reveal on scroll ====================== */
+const revs = gsap.utils.toArray('.reveal');
+revs.forEach(el => {
+  ScrollTrigger.create({
+    trigger: el, start: 'top 88%', once: true,
+    onEnter: () => el.classList.add('in')
+  });
+});
+
+/* ====================== Nav border on scroll ====================== */
+const nav = document.getElementById('nav');
+ScrollTrigger.create({
+  start: 'top -10', end: 99999,
+  onUpdate: self => {
+    nav.classList.toggle('scrolled', self.scroll() > 12);
+  }
+});
+
+/* ====================== Floating annotations parallax + photo ====================== */
+/* Wait for intro to finish, then start independent float loops on each pill */
+intro.eventCallback('onComplete', () => {
+  // Wipe leftover GSAP inline transforms/opacity from intro animations
+  gsap.set('.eyebrow, .eyebrow *', { clearProps: 'all' });
+  gsap.set('.annot', { clearProps: 'transform,opacity' });
+  // Start independent float loops on each annotation pill
+  gsap.to('.annot.a1', { y: -10, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+  gsap.to('.annot.a2', { y: 10,  duration: 3.8, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: .4 });
+  gsap.to('.annot.a3', { y: -8,  duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: .8 });
+});
+
+gsap.to('.photo-wrap', {
+  yPercent: -12,
+  ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+});
+
+/* ====================== Project cards: subtle parallax cover ====================== */
+gsap.utils.toArray('.proj').forEach(card => {
+  const cover = card.querySelector('.proj-cover img, .proj-cover svg');
+  gsap.fromTo(cover, { yPercent: -4 }, {
+    yPercent: 4,
+    ease: 'none',
+    scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true }
+  });
+});
+
+/* ====================== Big name reveal + scroll-scale ====================== */
+const big = document.getElementById('bigname');
+gsap.fromTo(big,
+  { yPercent: 30, opacity: 0, scaleY: .9 },
+  {
+    yPercent: 0, opacity: 1, scaleY: 1,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.big-name', start: 'top 88%', end: 'bottom bottom', scrub: 0.6 }
+  }
+);
+
+/* ====================== Skills marquee (duplicate track for seamless loop) ====================== */
+(() => {
+  const track = document.getElementById('marqueeTrack');
+  if(!track) return;
+  // Clone all children once so the track holds 2x — the keyframe translates -50% to loop seamlessly
+  track.innerHTML += track.innerHTML;
+})();
+
+/* ====================== CTA spotlight: dots glow around cursor ====================== */
+(() => {
+  const cta = document.querySelector('.cta-strip');
+  if(!cta) return;
+  let rect = cta.getBoundingClientRect();
+  let raf = 0;
+  const refreshRect = () => { rect = cta.getBoundingClientRect(); };
+  cta.addEventListener('mouseenter', refreshRect);
+  cta.addEventListener('mousemove', e => {
+    if(raf) return;
+    raf = requestAnimationFrame(() => {
+      // Always have a fresh rect — recompute if stale
+      const r = cta.getBoundingClientRect();
+      cta.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      cta.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      raf = 0;
+    });
+  });
+  addEventListener('scroll', refreshRect, {passive:true});
+  addEventListener('resize', refreshRect);
+})();
+
+/* ====================== Custom triangle cursor ====================== */
+const cursor = document.getElementById('cursor');
+const cursorDot = document.getElementById('cursorDot');
+
+// Pointer state
+let mx = innerWidth/2, my = innerHeight/2;        // raw mouse target
+let cx = mx, cy = my;                              // tip eased position
+let dx = mx, dy = my;                              // dot eased position (slower trail)
+let lastX = mx, lastY = my;                        // last frame tip pos for direction
+let angle = 0;                                     // current rotation
+let visible = false;
+
+addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  if(!visible){ cursor.style.opacity = 1; cursorDot.style.opacity = .6; visible = true; }
+});
+addEventListener('mouseleave', () => { cursor.style.opacity = 0; cursorDot.style.opacity = 0; visible = false; });
+addEventListener('mouseenter', () => { cursor.style.opacity = 1; cursorDot.style.opacity = .6; visible = true; });
+
+function loopCursor(){
+  // Eased follow — tip is fast, dot trails slower
+  cx += (mx - cx) * 0.28;
+  cy += (my - cy) * 0.28;
+  dx += (mx - dx) * 0.14;
+  dy += (my - dy) * 0.14;
+
+  // Rotate triangle toward direction of motion
+  const vx = cx - lastX, vy = cy - lastY;
+  const speed = Math.hypot(vx, vy);
+  if(speed > 0.5){
+    const target = Math.atan2(vy, vx) * 180 / Math.PI;
+    // shortest-path angle interpolation
+    let diff = target - angle;
+    while(diff > 180) diff -= 360;
+    while(diff < -180) diff += 360;
+    angle += diff * 0.25;
+  }
+
+  cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%) rotate(${angle}deg)`;
+  cursorDot.style.transform = `translate(${dx}px, ${dy}px) translate(-50%,-50%)`;
+
+  lastX = cx; lastY = cy;
+  requestAnimationFrame(loopCursor);
+}
+loopCursor();
+
+// Hover state for interactive elements
+const interactiveSel = 'a, button, .btn, .proj, [role="button"]';
+document.querySelectorAll(interactiveSel).forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('is-link'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('is-link'));
+});
+
+/* ====================== Refresh after fonts load ====================== */
+document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
+</script>
+</body>
+</html>
